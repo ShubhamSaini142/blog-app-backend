@@ -2,6 +2,7 @@ package com.backend.blogapi.blogappbackend.services;
 
 import com.backend.blogapi.blogappbackend.entities.Users;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
