@@ -1,31 +1,34 @@
 package com.backend.blogapi.blogappbackend.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.NonNull;
 import lombok.Setter;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Date;
 
 @Entity
 @NoArgsConstructor
 @Getter
 @Setter
-public class Category {
+public class Posts {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int categoryId;
+    private int id;
     @NotNull
-    private String categoryTitle;
+    @NotEmpty
+    private String title;
+    private String content;
+    private String imageName;
+    private Date addDate;
 
-    private String categoryDescription;
+   @ManyToOne
+   private Category category;
 
-    @OneToMany(mappedBy = "category" , cascade = CascadeType.ALL)
-    @JsonBackReference
-    private List<Posts> posts = new ArrayList<>();
-
+   @ManyToOne
+   private Users users;
 }

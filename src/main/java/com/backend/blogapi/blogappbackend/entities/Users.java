@@ -1,11 +1,17 @@
 package com.backend.blogapi.blogappbackend.entities;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -22,6 +28,10 @@ public class Users {
     private String email;
     private String password;
     private String about;
+
+    @OneToMany(mappedBy = "users" , cascade = CascadeType.ALL)
+    @JsonBackReference
+    private List<Posts> posts = new ArrayList<>();
 
 
 }
